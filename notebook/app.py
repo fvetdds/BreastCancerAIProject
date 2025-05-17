@@ -1,3 +1,21 @@
+!pip install joblib
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import streamlit as st
+import joblib
+from sklearn.cluster import KMeans
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score, mean_squared_error, root_mean_squared_error, mean_absolute_error, mean_absolute_percentage_error, classification_report, confusion_matrix,accuracy_score 
+from datetime import timedelta
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
+from xgboost import XGBClassifier
+from sklearn.datasets import load_breast_cancer
 import streamlit as st
 import joblib
 import numpy as np
