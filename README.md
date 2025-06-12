@@ -87,7 +87,7 @@ Outcomes: overall survival (OS), breast-cancer-specific survival (BCSS)
 - Breast Cancer Surveillance Consortium https://www.bcsc-research.org/index.php/datasets/rf
 The data were collected during January 2005 – December 2017 from 6,788,436 mammograms at different community breast imaging practices
 Key variables collected:
-1. Demographic: 
+Demographic: 
 Age (in 5-year groups)
 1 = Age 18-29
 2 = Age 30-34
@@ -102,66 +102,65 @@ Age (in 5-year groups)
 11 = Age 75-79
 12 = Age 80-84
 13 = Age >85
-2. Race/ethnicity	
+Race/ethnicity	
 1 = Non-Hispanic white
 2 = Non-Hispanic black
 3 = Asian/Pacific Islander
 4 = Native American
 5 = Hispanic
 6 = Other/mixed
-9 = Unknown
 
-3. Reproductive history: Age at menarche
+
+Age when had the first period
 0 = Age >14
 1 = Age 12-13
 2 = Age <12
-9 = Unknown
 
-4. age_first_birth	Age (years) at first birth	
+
+Age (years) at first birth	
 0 = Age < 20
 1 = Age 20-24
 2 = Age 25-29
 3 = Age >30
 4 = Nulliparous
-9 = Unknown
 
 
-5. Family/personal history: First-degree family history of breast cancer; personal history of breast biopsy or cancer
+
+Family/personal history: First-degree family history of breast cancer; personal history of breast biopsy or cancer
 0 = No
 1 = Yes
-9 = Unknown
 
-6. Breast characteristics: BI-RADS breast density
+
+Breast characteristics: BI-RADS breast density
 1 = Almost entirely fat
 2 = Scattered fibroglandular densities
 3 = Heterogeneously dense
 4 = Extremely dense
-9 = Unknown or different measurement system
 
-7. Hormone use
+
+Hormone use
 0 = No
 1 = Yes
-9 = Unknown
 
-8. menopausal status: 
+
+menopausal status: 
 1 = Pre- or peri-menopausal
 2 = Post-menopausal
 3 = Surgical menopause
-9 = Unknown
 
-9. Body size: BMI group
+Body size: BMI group
 1 = 10-24.99
 2 = 25-29.99
 3 = 30-34.99
 4 = 35 or more
-9 = Unknown
 
-10. Biopsy history
+
+Biopsy history
 0 = No
 1 = Yes
-9 = Unknown
 
-Target variable. Breast cancer history
+
+Breast cancer history
 0 = No
 1 = Yes
 

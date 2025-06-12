@@ -1,68 +1,62 @@
-!pip install streamlit
 import streamlit as st
 import pandas as pd
 import joblib
 
-@st.cache(allow_output_mutation=True)
-def load_artifacts():
-    return joblib.load("data/bcsc_xgb_model.pkl")
+# --- Page config & title ---
+st.set_page_config(page_title="Breast Cancer Risk", layout="centered")
+st.title("🎗️ Breast Cancer Risk Predictor")
 
-model = load_artifacts()
+# --- Load artifacts ---
+model = joblib.load("models/bcsc_xgb_model.pkl")
+threshold = joblib.load("models/threshold.pkl")
 
-st.title("BCSC Breast Cancer Risk Predictor")
+# --- Sidebar inputs ---
 st.sidebar.header("Patient Profile")
+def sel(label, opts): return st.sidebar.selectbox(label, list(opts.keys()), format_func=lambda k: opts[k])
 
-# --- your mappings ---
-age_map = {
-    "18–29":1, "30–34":2, "35–39":3, "40–44":4, "45–49":5,
-    "50–54":6, "55–59":7, "60–64":8, "65–69":9, "70–74":10,
-    "75–79":11, "80–84":12, ">85":13
-}
-race_map = {
-    "Non-Hispanic white":1, "Non-Hispanic black":2,
-    "Asian/Pacific Islander":3, "Native American":4,
-    "Hispanic":5, "Other/mixed":6, "Unknown":9
-}
-men_map = {"<12":2, "12–13":1, ">14":0, "Unknown":9}
-afb_map = {"<20":0, "20–24":1, "25–29":2, ">30":3, "Nulliparous":4, "Unknown":9}
-fh_map = {"No":0, "Yes":1, "Unknown":9}
-den_map = {
-    "Almost entirely fat":1, "Scattered fibroglandular":2,
-    "Heterogeneously dense":3, "Extremely dense":4, "Unknown":9
-}
-hrt_map = {"No":0, "Yes":1, "Unknown":9}
-meno_map = {"Pre-/peri-menopausal":1, "Post-menopausal":2, "Surgical menopause":3, "Unknown":9}
-bmi_map = {"10–24.99":1, "25–29.99":2, "30–34.99":3, "≥35":4, "Unknown":9}
-bx_map = {"No":0, "Yes":1, "Unknown":9}
+age_groups = {1:"18–29",2:"30–34",3:"35–39",4:"40–44",5:"45–49",6:"50–54",7:"55–59",8:"60–64",9:"65–69",10:"70–74",11:"75–79",12:"80–84",13:">85"}
+race_eth   = {1:"NH white",2:"NH black",3:"Asian/PI",4:"Native Am",5:"Hispanic",6:"Other"}
+menarche    = {0:">14",1:"12–13",2:"<12"}
+birth_age   = {0:"<20",1:"20–24",2:"25–29",3:">30",4:"Nulliparous"}
+fam_hist    = {0:"No",1:"Yes"}
+biopsy      = {0:"No",1:"Yes"}
+density     = {1:"Almost fat",2:"Scattered",3:"Hetero-dense",4:"Extremely"}
+hormone_use = {0:"No",1:"Yes"}
+menopause   = {1:"Pre/peri",2:"Post",3:"Surgical"}
+bmi_group   = {1:"10–24.9",2:"25–29.9",3:"30–34.9",4:"35+"}
 
-# --- sidebar selects ---
-age       = st.sidebar.selectbox("Age group", list(age_map.keys()))
-race      = st.sidebar.selectbox("Race/ethnicity", list(race_map.keys()))
-menarche  = st.sidebar.selectbox("Age at menarche", list(men_map.keys()))
-afb       = st.sidebar.selectbox("Age at first birth", list(afb_map.keys()))
-fam_hx    = st.sidebar.selectbox("First-degree family history", list(fh_map.keys()))
-density   = st.sidebar.selectbox("BI-RADS density", list(den_map.keys()))
-hrt       = st.sidebar.selectbox("Current hormone therapy use", list(hrt_map.keys()))
-meno      = st.sidebar.selectbox("Menopausal status", list(meno_map.keys()))
-bmi       = st.sidebar.selectbox("BMI group", list(bmi_map.keys()))
-biopsy    = st.sidebar.selectbox("Biopsy history", list(bx_map.keys()))
-
-# --- build the DataFrame correctly ---
-input_dict = {
-    "age_group_5_years":       age_map[age],
-    "race_eth":                race_map[race],
-    "age_menarche":            men_map[menarche],
-    "age_first_birth":         afb_map[afb],
-    "first_degree_hx":         fh_map[fam_hx],                  # <- fix here
-    "BIRADS_breast_density":   den_map[density],
-    "current_hrt":             hrt_map[hrt],
-    "menopaus":                meno_map[meno],
-    "bmi_group":               bmi_map[bmi],
-    "biophx":                  bx_map[biopsy],
+inputs = {
+    "age_group":       sel("Age group", age_groups),
+    "race_ethnicity":  sel("Race/Ethnicity", race_eth),
+    "age_menarche":    sel("Age at menarche", menarche),
+    "age_first_birth": sel("Age at first birth", birth_age),
+    "family_history":  sel("Family history", fam_hist),
+    "personal_biopsy": sel("Personal biopsy history", biopsy),
+    "density":         sel("BI-RADS density", density),
+    "hormone_use":     sel("Hormone use", hormone_use),
+    "menopausal_status": sel("Menopausal status", menopause),
+    "bmi_group":       sel("BMI group", bmi_group),
 }
 
-X_input = pd.DataFrame([input_dict])
+# --- Prediction ---
+df_new = pd.DataFrame([inputs])
+prob = model.predict_proba(df_new)[0,1]
+label = "⚠️ High risk" if prob >= threshold else "✅ Low risk"
 
-if st.button("Predict risk"):
-    prob = model.predict_proba(X_input)[0, 1]
-    st.write(f"🔍 **Predicted probability of prior breast cancer:** {prob:.1%}")
+# --- Risk bucket text ---
+if prob < 0.20:
+    bucket = "Low risk (<20%)"
+elif prob < 0.50:
+    bucket = "Moderate risk (20–50%)"
+else:
+    bucket = "High risk (>50%)"
+
+# --- Display ---
+st.subheader("Results")
+st.metric("Predicted probability", f"{prob:.1%}", delta=None)
+st.write(f"**Risk bucket:** {bucket}")
+st.write(f"**Binary call (thr={threshold:.2f}):** {label}")
+
+st.markdown("---")
+st.write("**Inputs:**")
+st.json(inputs)
