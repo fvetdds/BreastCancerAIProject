@@ -5,8 +5,8 @@ import joblib
 from pathlib import Path
 
 # Page config
-st.set_page_config(page_title="Breast Cancer Risk & Survival", layout="wide")
-st.title("🎗️ Breast Cancer Risk & Survival Dashboard")
+st.set_page_config(page_title="Breast Cancer Risk factor and 5 Year Survival prediction", layout="wide")
+st.title("🎗️ Breast Cancer Risk factor and 5-Year Survival Prediction")
 
 # Load models and data
 BASE_DIR = Path(__file__).resolve().parent
@@ -153,22 +153,9 @@ with tab3:
     # Local support groups
     st.markdown("**Local Support Groups in Nashville, TN:**")
     support_groups = [
-        {
-            "name": "Susan G. Komen Nashville",
-            "phone": "(615) 673-6633",
-            "website": "https://komen.org/nashville"
-        },
-        {
-            "name": "Vanderbilt Breast Cancer Support Group",
-            "phone": "(615) 322-3900",
-            "website": "https://www.vicc.org/support-groups"
-        },
-        {
-            "name": "Alive Hospice Cancer Support",
-            "phone": "(615) 327-1085",
-            "website": "https://alivehospice.org"
-        }
+        {"name": "Susan G. Komen Nashville", "phone": "(615) 673-6633", "website": "https://komen.org/nashville"},
+        {"name": "Vanderbilt Breast Cancer Support Group", "phone": "(615) 322-3900", "website": "https://www.vicc.org/support-groups"},
+        {"name": "Alive Hospice Cancer Support", "phone": "(615) 327-1085", "website": "https://alivehospice.org"}
     ]
     for grp in support_groups:
         st.markdown(f"- **{grp['name']}**: {grp['phone']} | [Website]({grp['website']})")
-
