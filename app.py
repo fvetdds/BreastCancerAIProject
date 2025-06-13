@@ -3,6 +3,18 @@ import pandas as pd
 import numpy as np
 import joblib
 from pathlib import Path
+st.markdown(
+    """
+    <style>
+      div[role="tablist"] > button:not(:last-child) {
+        border-right: 1px solid rgba(255,255,255,0.2);
+        margin-right: 1rem;    /* space after the divider */
+        padding-right: 1rem;   /* keeps text off the line */
+      }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Page config
 st.set_page_config(page_title="Breast Cancer Risk & Survival", layout="wide")
@@ -78,7 +90,7 @@ with tab3:
     st.write("Here are some tips and a simple tracker to help you with meditation, diet, and exercise.")
 
     # Tips section
-    st.subheader("Must do list")
+    st.subheader("Daily Rituals")
     tips = [
         "🧘 Practice 10 minutes of mindfulness meditation",
         "🥗 Include at least 5 servings of fruits and vegetables",
