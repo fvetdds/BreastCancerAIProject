@@ -36,8 +36,10 @@ inputs = {
     "menopausal_status": sel("Menopausal status", menopause),
     "bmi_group":       sel("BMI group", bmi_group),
 }
-
+expected = model.get_booster().feature_names
 df_new = pd.DataFrame({...}, index=[0])
+df_new = df_new.reindex(columns=expected, fill_value=0)
+df_new = df_new.astype(np.float32)
 prob = model.predict_proba(df_new)[0,1]
 label = "⚠️ High risk" if prob >= threshold else "✅ Low risk"
 
