@@ -4,6 +4,25 @@ import numpy as np
 import joblib
 from pathlib import Path
 
+#custom design
+st.markdown(
+    """
+    <style>
+    /* Narrow the sidebar dropdowns */
+    [data-baseweb="select"] > div {
+      min-width: 200px;
+      max-width: 220px;
+    }
+    /* Increase the font size of the tab labels */
+    .streamlit-expanderHeader, .css-1avcm0n.e1fqkh3o6 > div[role="tab"] {
+      font-size: 18px !important;
+      font-weight: 600;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Page config
 st.set_page_config(page_title="Breast Cancer Risk factor and 5 Year Survival prediction", layout="wide")
 st.title("🎗️ Breast Cancer Risk factor and 5-Year Survival Prediction")
