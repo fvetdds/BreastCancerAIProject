@@ -71,8 +71,7 @@ with tab1:
 # --- Tab 2: 5-Year Survival Predictor ---
 with tab2:
     st.header("5-Year Survival Probability by Gene Mutation Markers")
-    st.write("Select gene mutation markers to estimate the probability of surviving at least 5 years post-diagnosis.")
-
+    
 # --- Tab 3: Wellness & Tracker ---
 with tab3:
     st.header("Wellness & Life Coaching")
