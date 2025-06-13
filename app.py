@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 from pathlib import Path
-
+st.set_page_config(page_title="Breast Cancer Risk factor and 5 Year Survival prediction", layout="wide")
 #custom design
 st.markdown(
     """
@@ -24,7 +24,6 @@ st.markdown(
 )
 
 # Page config
-st.set_page_config(page_title="Breast Cancer Risk factor and 5 Year Survival prediction", layout="wide")
 st.title("🎗️ Breast Cancer Risk factor and 5-Year Survival Prediction")
 
 # Load models and data
