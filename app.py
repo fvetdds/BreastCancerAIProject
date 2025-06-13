@@ -40,8 +40,12 @@ inputs = {
     "bmi_group":       sel("BMI group", bmi_group),
 }
 
+expected = model.get_booster().feature_names
+st.write("Expected cols:", expected)
+st.write("Got cols     :", df_new.columns.tolist())
 
 df_new = pd.DataFrame([inputs])
+
 prob = model.predict_proba(df_new)[0,1]
 label = "⚠️ High risk" if prob >= threshold else "✅ Low risk"
 
