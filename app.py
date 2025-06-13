@@ -37,7 +37,7 @@ inputs = {
     "bmi_group":       sel("BMI group", bmi_group),
 }
 
-df_new = pd.DataFrame({...}, index=[0]))
+df_new = pd.DataFrame({...}, index=[0])
 prob = model.predict_proba(df_new)[0,1]
 label = "⚠️ High risk" if prob >= threshold else "✅ Low risk"
 
