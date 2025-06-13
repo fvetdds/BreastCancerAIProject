@@ -31,7 +31,10 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-st.title("🎗️ EmpowerHER")
+st.markdown("""
+    <h1 style='color:#008080; font-size:2.8rem; font-weight:bold; margin-bottom:0.5em;'>🎗️ EmpowerHER</h1>
+""", unsafe_allow_html=True)
+
 
 
 # Load models and data
