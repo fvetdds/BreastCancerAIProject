@@ -7,10 +7,12 @@ st.set_page_config(page_title="Breast Cancer Risk", layout="centered")
 st.title("🎗️ Breast Cancer Risk Predictor")
 
 
-model = joblib.load("../models/bcsc_xgb_model.pkl")
-threshold = joblib.load("../models/threshold.pkl")
+from pathlib import Path
 
-
+BASE_DIR = Path(__file__).resolve().parent
+model_path = BASE_DIR / "models" / "bcsc_xgb_model.pkl"
+model = joblib.load(model_path)
+threshold = joblib.load("models/threshold.pkl")
 st.sidebar.header("Your information")
 def sel(label, opts): return st.sidebar.selectbox(label, list(opts.keys()), format_func=lambda k: opts[k])
 
