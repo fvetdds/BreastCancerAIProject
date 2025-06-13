@@ -6,7 +6,7 @@ from pathlib import Path
 
 # Page config
 st.set_page_config(page_title="Breast Cancer Risk & Survival", layout="wide")
-st.title("🎗️ Breast Cancer Risk & Survival Dashboard")
+st.title("🎗️ EmpowerHER")
 
 
 # Load models and data
@@ -16,7 +16,7 @@ model = joblib.load(BASE_DIR / "models" / "bcsc_xgb_model.pkl")
 threshold = joblib.load(BASE_DIR / "models" / "threshold.pkl")
 
 # Create tabs
-tab1, tab2, tab3 = st.tabs(["Risk Predictor", "5-Year Survival", "Wellness & Tracker"])
+tab1, tab2, tab3 = st.tabs(["Risk Insights", "Thrive Prediction", "Mind & Move"])
 
 # --- Tab 1: Breast Cancer Risk Predictor ---
 with tab1:
@@ -74,11 +74,11 @@ with tab2:
     
 # --- Tab 3: Wellness & Tracker ---
 with tab3:
-    st.header("Wellness & Life Coaching")
+    st.header("Wellness and Selfcare tools")
     st.write("Here are some tips and a simple tracker to help you with meditation, diet, and exercise.")
 
     # Tips section
-    st.subheader("Daily Wellness Tips")
+    st.subheader("Daily to-do list")
     tips = [
         "🧘 Practice 10 minutes of mindfulness meditation",
         "🥗 Include at least 5 servings of fruits and vegetables",
@@ -90,7 +90,7 @@ with tab3:
         st.markdown(f"- {tip}")
 
     # Tracker section
-    st.subheader("Your Daily Tracker")
+    st.subheader("Glow & Grow Tracker")
     col1, col2, col3 = st.columns(3)
     with col1:
         meditate_mins = st.number_input("Meditation minutes", min_value=0, max_value=60, value=0)
