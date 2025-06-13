@@ -37,18 +37,17 @@ inputs = {
     "menopausal_status": sel("Menopausal status", menopause),
     "bmi_group":       sel("BMI group", bmi_group),
 }
-expected = model.get_booster().feature_names
-df_new = pd.DataFrame({...}, index=[0])
-df_new = df_new.reindex(columns=expected, fill_value=0)
-df_new = df_new.astype(np.float32)
+raw_df = pd.Dataframe(inputs, index=[0])
+df_new = raw_df.astype(np.float32)
+
 prob = model.predict_proba(df_new)[0,1]
-label = "⚠️ High risk" if prob >= threshold else "✅ Low risk"
+label = "High risk" if prob >= threshold else "Low risk"
 
 
 st.subheader("Results")
 st.write("Predicted probability", f"{prob:.1%}", delta=None)
 if label == "High risk":
-    st.error(f"⚠️ {label}(threshold = {threshold:.2f})")
+    st.error(f"{label}(threshold = {threshold:.2f})")
 else:
-    st.success(f"✅ {label}(threshold ={threshold:.2f})")
+    st.success(f"{label}(threshold ={threshold:.2f})")
     
