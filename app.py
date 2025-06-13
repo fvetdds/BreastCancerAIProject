@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 from pathlib import Path
+import numpy as np
 
 st.set_page_config(page_title="Breast Cancer Risk", layout="centered")
 st.title("🎗️ Breast Cancer Risk Predictor")
