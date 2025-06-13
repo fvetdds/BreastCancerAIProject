@@ -1,18 +1,15 @@
 import streamlit as st
 import pandas as pd
 import joblib
-
+from pathlib import Path
 
 st.set_page_config(page_title="Breast Cancer Risk", layout="centered")
 st.title("🎗️ Breast Cancer Risk Predictor")
 
-
-from pathlib import Path
-
 BASE_DIR = Path(__file__).resolve().parent
 model_path = BASE_DIR / "models" / "bcsc_xgb_model.pkl"
 model = joblib.load(model_path)
-threshold = joblib.load("models/threshold.pkl")
+threshold = 0.48
 st.sidebar.header("Your information")
 def sel(label, opts): return st.sidebar.selectbox(label, list(opts.keys()), format_func=lambda k: opts[k])
 
@@ -40,29 +37,15 @@ inputs = {
     "bmi_group":       sel("BMI group", bmi_group),
 }
 
-expected = model.get_booster().feature_names
-st.write("Expected cols:", expected)
-st.write("Got cols     :", df_new.columns.tolist())
-
-df_new = pd.DataFrame([inputs])
-
+df_new = pd.DataFrame({...}, index=[0]))
 prob = model.predict_proba(df_new)[0,1]
 label = "⚠️ High risk" if prob >= threshold else "✅ Low risk"
 
 
-if prob < 0.20:
-    bucket = "Low risk (<20%)"
-elif prob < 0.50:
-    bucket = "Moderate risk (20–50%)"
-else:
-    bucket = "High risk (>50%)"
-
-
 st.subheader("Results")
-st.metric("Predicted probability", f"{prob:.1%}", delta=None)
-st.write(f"**Risk bucket:** {bucket}")
-st.write(f"**Binary call (thr={threshold:.2f}):** {label}")
-
-st.markdown("---")
-st.write("**Inputs:**")
-st.json(inputs)
+st.write("Predicted probability", f"{prob:.1%}", delta=None)
+if label == "High risk":
+    st.error(f"⚠️ {label}(threshold = {threshold:.2f})")
+else:
+    st.success(f "✅ {label}(threshold ={threshold:.2f})")
+    
