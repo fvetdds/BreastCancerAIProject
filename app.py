@@ -73,30 +73,7 @@ with tab2:
     st.header("5-Year Survival Probability by Gene Mutation Markers")
     st.write("Select gene mutation markers to estimate the probability of surviving at least 5 years post-diagnosis.")
 
-    gene_cols = [c for c in surv_df.columns if c.endswith("_mut")]
-    selected_genes = st.multiselect("Select gene mutation markers", gene_cols)
-
-    if selected_genes:
-        med = surv_df[selected_genes].median()
-        mask = np.ones(len(surv_df), dtype=bool)
-        for gene in selected_genes:
-            mask &= surv_df[gene] >= med[gene]
-        filtered = surv_df[mask]
-
-        if filtered.empty:
-            st.warning("No patients match the selected gene mutation criteria.")
-        else:
-            base_prob = (surv_df["overall_survival_months"] >= 60).mean()
-            filtered_prob = (filtered["overall_survival_months"] >= 60).mean()
-            st.write(f"**Baseline 5-year survival:** {base_prob:.1%} (n={len(surv_df)})")
-            st.write(f"**Filtered 5-year survival:** {filtered_prob:.1%} (n={len(filtered)})")
-            st.dataframe(
-                filtered[["patient_id", "overall_survival_months", "overall_survival"] + selected_genes]
-                .head(10)
-            )
-    else:
-        st.info("Select one or more gene mutation markers to compute survival probability.")
-
+    
 # --- Tab 3: Wellness & Tracker ---
 with tab3:
     st.header("Daily Selfcare log")
