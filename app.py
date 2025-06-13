@@ -4,21 +4,10 @@ import numpy as np
 import joblib
 from pathlib import Path
 
-# ─── Page config ──────────────────────────────────────────────────────────────
+# Page config 
 st.set_page_config(page_title="🎗️ EmpowerHER", layout="wide")
 
-# ─── Optional CSS ─────────────────────────────────────────────────────────────
-st.markdown(
-    """
-    <style>
-    [data-baseweb="select"] > div { min-width:200px; max-width:220px; }
-    [role="tab"] { font-size:18px; color:#FF8C00; }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-# ─── Cached loaders (won’t run until called) ─────────────────────────────────
+# Cached loaders 
 @st.cache_resource
 def load_model_and_threshold():
     base = Path(__file__).resolve().parent / "models"
@@ -51,15 +40,28 @@ with tab1:
     def sel(label, opts):
         return st.sidebar.selectbox(label, list(opts.keys()), format_func=lambda k: opts[k])
 
-    age_groups = {1: "18–29", 2: "30–34", 3: "35–39", 4: "40–44", 5: "45–49",
-                  6: "50–54", 7: "55–59", 8: "60–64", 9: "65–69", 10: "70–74",
-                  11: "75–79", 12: "80–84", 13: ">85"}
-    # ... (other mapping dicts unchanged) ...
-    bmi_group = {1: "10–24.9", 2: "25–29.9", 3: "30–34.9", 4: "35+"}
+        age_groups  = {1:"18–29", 2:"30–34", 3:"35–39", 4:"40–44", 5:"45–49", 6:"50–54", 7:"55–59", 8:"60–64", 9:"65–69", 10:"70–74", 11:"75–79", 12:"80–84", 13:">85"}
+        race_eth    = {1:"White", 2:"Black", 3:"Asian or Pacific Island", 4:"Native American", 5:"Hispanic", 6:"Other"}
+        menarche    = {0:">14", 1:"12–13", 2:"<12"}
+        birth_age   = {0:"<20", 1:"20–24", 2:"25–29", 3:">30", 4:"Nulliparous"}
+        fam_hist    = {0:"No", 1:"Yes"}
+        biopsy      = {0:"No", 1:"Yes"}
+        density     = {1:"Almost fat", 2:"Scattered", 3:"Hetero-dense", 4:"Extremely"}
+        hormone_use = {0:"No", 1:"Yes"}
+        menopause   = {1:"Pre/peri", 2:"Post", 3:"Surgical"}
+        bmi_group   = {1:"10–24.9", 2:"25–29.9", 3:"30–34.9", 4:"35+"}
+
 
     inputs = {
         "age_group": sel("Age group", age_groups),
-        # … all other inputs …
+        "race_eth":          sel("Race/Ethnicity", race_eth),
+        "age_menarche":      sel("Age at 1st period", menarche),
+        "age_first_birth":   sel("Age at first birth", birth_age),
+        "family_history":    sel("Family history of cancer", fam_hist),
+        "personal_biopsy":   sel("Personal biopsy history", biopsy),
+        "density":           sel("BI-RADS density", density),
+        "hormone_use":       sel("Hormone use", hormone_use),
+        "menopausal_status": sel("Menopausal status", menopause),
         "bmi_group": sel("BMI group", bmi_group),
     }
 
