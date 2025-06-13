@@ -7,6 +7,30 @@ from pathlib import Path
 
 # Page config
 st.set_page_config(page_title="Breast Cancer Risk & Survival", layout="wide")
+st.markdown("""
+    <style>
+    /* Make tab labels larger and yellow */
+    .stTabs [data-baseweb="tab"] {
+        font-size: 1.2rem;
+        color: #ffd700;  /* gold */
+        background: none;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.3s;
+    }
+    /* Highlight the active tab with bold, underline, white text, and yellow border */
+    .stTabs [aria-selected="true"] {
+        font-weight: bold;
+        color: #fff !important;     /* white text */
+        border-bottom: 4px solid #ffd700 !important;  /* thick gold underline */
+        background: #232323;        /* slight dark bg */
+    }
+    /* Make the tab row more visible */
+    .stTabs [role="tablist"] {
+        border-bottom: 1px solid #ffd700;
+        margin-bottom: 2em;
+    }
+    </style>
+""", unsafe_allow_html=True)
 st.title("🎗️ EmpowerHER")
 
 
