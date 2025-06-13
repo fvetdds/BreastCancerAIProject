@@ -26,7 +26,7 @@ bmi_group   = {1:"10–24.9",2:"25–29.9",3:"30–34.9",4:"35+"}
 
 inputs = {
     "age_group":       sel("Age group", age_groups),
-    "race_ethnicity":  sel("Race/Ethnicity", race_eth),
+    "race_eth":  sel("Race/Ethnicity", race_eth),
     "age_menarche":    sel("Age at the 1st period", menarche),
     "age_first_birth": sel("Age at first birth", birth_age),
     "family_history":  sel("Family history of cancer", fam_hist),
