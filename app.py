@@ -6,7 +6,7 @@ from pathlib import Path
 
 # ─── Page config (first Streamlit call) ───────────────────────────────────────
 st.set_page_config(
-    page_title="Breast Cancer Risk & 5-Year Survival",
+    page_title="Breast Cancer Risk factors and 5-Year Survival prediction",
     layout="wide"
 )
 
@@ -23,7 +23,7 @@ st.markdown(
 )
 
 # ─── Title ────────────────────────────────────────────────────────────────────
-st.title("🎗️ Breast Cancer Risk & 5-Year Survival")
+st.title("🎗️ Breast Cancer Risk factors and 5-Year Survival prediction")
 
 # ─── Load models and data ─────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent
