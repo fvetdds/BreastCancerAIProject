@@ -74,11 +74,11 @@ with tab2:
     
 # --- Tab 3: Wellness & Tracker ---
 with tab3:
-    st.header("Wellness and Selfcare tools")
+    st.header("Glow and Grow")
     st.write("Here are some tips and a simple tracker to help you with meditation, diet, and exercise.")
 
     # Tips section
-    st.subheader("Daily to-do list")
+    st.subheader("Must do list")
     tips = [
         "🧘 Practice 10 minutes of mindfulness meditation",
         "🥗 Include at least 5 servings of fruits and vegetables",
@@ -90,7 +90,7 @@ with tab3:
         st.markdown(f"- {tip}")
 
     # Tracker section
-    st.subheader("Glow & Grow Tracker")
+    st.subheader("Shape The Future U Tracker")
     col1, col2, col3 = st.columns(3)
     with col1:
         meditate_mins = st.number_input("Meditation minutes", min_value=0, max_value=60, value=0)
