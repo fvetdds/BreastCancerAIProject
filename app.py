@@ -47,5 +47,5 @@ st.write("Predicted probability", f"{prob:.1%}", delta=None)
 if label == "High risk":
     st.error(f"⚠️ {label}(threshold = {threshold:.2f})")
 else:
-    st.success(f "✅ {label}(threshold ={threshold:.2f})")
+    st.success(f"✅ {label}(threshold ={threshold:.2f})")
     
