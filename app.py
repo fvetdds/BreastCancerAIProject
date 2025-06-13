@@ -37,7 +37,7 @@ inputs = {
     "menopausal_status": sel("Menopausal status", menopause),
     "bmi_group":       sel("BMI group", bmi_group),
 }
-raw_df = pd.Dataframe(inputs, index=[0])
+raw_df = pd.DataFrame(inputs, index=[0])
 df_new = raw_df.astype(np.float32)
 
 prob = model.predict_proba(df_new)[0,1]
