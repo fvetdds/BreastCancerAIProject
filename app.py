@@ -15,12 +15,6 @@ def load_model_and_threshold():
     threshold = joblib.load(base / "threshold.pkl")
     return model, threshold
 
-@st.cache_data
-def load_survival_data():
-    data_path = Path(__file__).resolve().parent / "data" / "METABRIC.csv"
-    if not data_path.exists():
-        data_path = Path("../data") / "METABRIC.csv"
-    return pd.read_csv(data_path)
 
 age_groups  = {1:"18–29", 2:"30–34", 3:"35–39", 4:"40–44", 5:"45–49", 6:"50–54",
                7:"55–59", 8:"60–64", 9:"65–69", 10:"70–74", 11:"75–79", 12:"80–84", 13:">85"}
@@ -88,11 +82,7 @@ with tab1:
 # --- Tab 2: Thrive Forecast 
 with tab2:
     st.header("Thrive Forecast")
-    if st.button("Load Survival Data", key="load_survival"):
-        with st.spinner("Loading survival data..."):
-            surv_df = load_survival_data()
-            st.dataframe(surv_df)  
-
+    
 # --- Tab 3: Mind & Move 
 with tab3:
     st.header("Mind & Move")
