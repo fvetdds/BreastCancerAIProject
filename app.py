@@ -14,7 +14,7 @@ st.sidebar.header("Your information")
 def sel(label, opts): return st.sidebar.selectbox(label, list(opts.keys()), format_func=lambda k: opts[k])
 
 age_groups = {1:"18–29",2:"30–34",3:"35–39",4:"40–44",5:"45–49",6:"50–54",7:"55–59",8:"60–64",9:"65–69",10:"70–74",11:"75–79",12:"80–84",13:">85"}
-race   = {1:"White",2:"Black",3:"Asian or pacific island",4:"Native American",5:"Hispanic",6:"Other"}
+race_eth   = {1:"White",2:"Black",3:"Asian or pacific island",4:"Native American",5:"Hispanic",6:"Other"}
 menarche    = {0:">14",1:"12–13",2:"<12"}
 birth_age   = {0:"<20",1:"20–24",2:"25–29",3:">30",4:"Nulliparous"}
 fam_hist    = {0:"No",1:"Yes"}
