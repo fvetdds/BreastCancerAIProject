@@ -11,9 +11,9 @@ st.markdown("""
     <style>
     /* Make tab labels larger and yellow */
     .stTabs [data-baseweb="tab"] {
-        font-size: 1.2rem;
-        color: #ffd700;  /* gold */
-        background: none;
+        font-size: 3.5rem;
+        color: #008080;  /* teal */
+        background: #FFD700;
         border-bottom: 2px solid transparent;
         transition: border-color 0.3s;
     }
@@ -95,6 +95,48 @@ with tab1:
         st.error(f"{icon} {risk_str} (threshold = {threshold:.2f})")
     else:
         st.success(f"{icon} {risk_str} (threshold = {threshold:.2f})")
+st.markdown("---")
+st.markdown("### 📊 About the Data and Model Behind This Risk Factor Prediction")
+st.markdown("""
+The Breast Cancer Surveillance Consortium (BCSC) dataset contains millions of mammogram records, risk factors, and cancer outcomes from diverse populations in the U.S.  
+[Learn more about BCSC](https://www.bcsc-research.org/)
+""")
+# Figure 1: Age of participant by group
+st.image("figures/age.png", width=450)
+st.markdown("""
+**BCSC Data Source**  
+The Breast Cancer Surveillance Consortium (BCSC) dataset contains millions of mammogram records, risk factors, and cancer outcomes from diverse populations in the U.S.  
+[Learn more about BCSC](https://www.bcsc-research.org/)
+""")
+
+# Figure 2: Feature Distribution Example
+st.image("figures/feature_distribution.png", width=450)
+st.markdown("""
+**Key Features Used for Prediction**  
+Features include age, race/ethnicity, age at first period, age at first birth, family history, breast density, hormone use, and more. The chart above shows the distribution of selected features in the dataset.
+""")
+
+# Figure 3: XGBoost Classifier
+st.image("figures/xgboost_model.png", width=450)
+st.markdown("""
+**XGBoost Classifier**  
+We use a gradient-boosted decision tree model (XGBoost) that combines many simple trees for accurate prediction of breast cancer risk.
+""")
+
+# Figure 4: Feature Importance
+st.image("figures/feature_importance.png", width=450)
+st.markdown("""
+**Which Factors Matter Most?**  
+The feature importance plot shows which risk factors contribute most to the model's predictions.
+""")
+
+# Figure 5: Risk Calculation Pipeline
+st.image("figures/prediction_pipeline.png", width=450)
+st.markdown("""
+**How is Your Risk Calculated?**  
+Your answers are transformed into numbers and passed into our trained XGBoost model, which outputs a probability. This is compared to a data-driven threshold to classify your risk as low or high.
+""")
+
 
 # --- Tab 2: 5-Year Survival Predictor ---
 with tab2:
